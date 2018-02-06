@@ -13,14 +13,12 @@ using System.Diagnostics;
 
 namespace PharmAid.RX
 {
-    public class Status
+    public class PharmStatus
     {
         public static string RxUrl = "https://pharmapi.azurewebsites.net/api/HttpTriggerCSharp1?code=qRmH3eJABWVaIZJ26HVtNKqTogzkMRBzsm4acL5N6n9RMB2TTNTVLQ==";
 
         // Call the remote web service.  Invoked from AlexaSpeechletAsync
-        // Then, call another function with the raw JSON results to generate the spoken text and card text
-
-        // public static SpeechletResponse FillRxIntent(Session session)
+        // Parse the raw JSON results to generate the spoken text and card text
         public static async Task<SpeechletResponse> FillRxIntent(Session session, HttpClient httpClient)
         {
 
@@ -30,7 +28,6 @@ namespace PharmAid.RX
             var httpResponseMessage = await httpClient.GetAsync(RxUrl+"&action=pharmFill");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
-                //httpResultString = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 httpResultString = await httpResponseMessage.Content.ReadAsStringAsync();
             }
             else
@@ -38,10 +35,27 @@ namespace PharmAid.RX
                 httpResponseMessage.Dispose();
                 return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
             }
+            var simpleIntentResponse = ParseResults(httpResultString, "Prescription for Crestor");
+            httpResponseMessage.Dispose();
+            return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
+        }
 
-            // return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
-            // var simpleIntentResponse = ParseResults("Your prescription will be filled");
+        public static async Task<SpeechletResponse> WhereRxIntent(Session session, HttpClient httpClient)
+        {
 
+            string httpResultString = "";
+
+            httpClient.DefaultRequestHeaders.Clear();
+            var httpResponseMessage = await httpClient.GetAsync(RxUrl + "&action=pharmLoc");
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                httpResultString = await httpResponseMessage.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                httpResponseMessage.Dispose();
+                return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
+            }
             var simpleIntentResponse = ParseResults(httpResultString, "Prescription for Crestor");
             httpResponseMessage.Dispose();
             return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);

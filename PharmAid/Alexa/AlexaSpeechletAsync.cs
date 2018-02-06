@@ -134,7 +134,9 @@ namespace PharmAid.Alexa
             switch (intentName)
             {
                case ("FillRxIntent"):
-                    return await RX.Status.FillRxIntent(session, httpClient);
+                    return await RX.PharmStatus.FillRxIntent(session, httpClient);
+                case ("WhereRxIntent"):
+                    return await RX.PharmStatus.WhereRxIntent(session, httpClient);
                 //return Task.FromResult<SpeechletResponse>(Tfl.Status.GetResults(session, httpClient));
                 // add your own intent handler
                 // case ("YourCustomIntent"):
@@ -142,9 +144,6 @@ namespace PharmAid.Alexa
                 //   invalid pattern with change // return Task.FromResult<SpeechletResponse>(YourCustomIntentClass(session, whateverYouNeedToPass));
                 // did you forget to implement an intent?
                 // just send the user to the intent-less utterance
-                /*
-                case ("RxReadyIntent"):
-                    return await RX.Status.RxReadyIntent(session,httpClient);
                 //return Task.FromResult<SpeechletResponse>(Tfl.Status.GetResults(session, httpClient));
                 // add your own intent handler
                 // case ("YourCustomIntent"):
@@ -152,8 +151,6 @@ namespace PharmAid.Alexa
                 //   invalid pattern with change // return Task.FromResult<SpeechletResponse>(YourCustomIntentClass(session, whateverYouNeedToPass));
                 // did you forget to implement an intent?
                 // just send the user to the intent-less utterance
-                */
-
                 default:
                     return await Task.FromResult<SpeechletResponse>(GetOnLaunchAsyncResult(session));
             }

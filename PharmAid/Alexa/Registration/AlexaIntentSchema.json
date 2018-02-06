@@ -1,16 +1,16 @@
 ﻿{
-  "intents": [
-    {
-        "intent": "FillRxIntent"
-    },
-    {
-        "intent": "RxReadyIntent"
-    },
-    {
-        "intent": "WhereRxIntent"
-    },
-    {
-        "intent": "CallDoctorIntent"
-    }
-  ]
+    "intents": [
+        {
+            "intent": "FillRxIntent"
+        },
+        {
+            "intent": "WhereRxIntent"
+        },
+        {
+            "intent": "RxReadyIntent"
+        },
+        {
+            "intent": "CallDoctorIntent"
+        }
+    ]
 }

@@ -123,14 +123,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PA\Status.cs" />
+    <Compile Include="PA\PharmStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Alexa\Registration\AlexaIntentSchema.json" />
-    <Content Include="PA\StatusExample1.json" />
-    <Content Include="PA\StatusExample2.json" />
-    <Content Include="PA\StatusExample3.json" />
     <None Include="Properties\PublishProfiles\PharmAid - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
