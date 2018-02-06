@@ -15,7 +15,7 @@ namespace PharmAid.RX
 {
     public class PharmStatus
     {
-        public static string RxUrl = "https://pharmapi.azurewebsites.net/api/HttpTriggerCSharp1?code=qRmH3eJABWVaIZJ26HVtNKqTogzkMRBzsm4acL5N6n9RMB2TTNTVLQ==";
+        public static string RxUrl = "http://pharmapi.azurewebsites.net/api/PAFunc1";
 
         // Call the remote web service.  Invoked from AlexaSpeechletAsync
         // Parse the raw JSON results to generate the spoken text and card text
@@ -25,7 +25,7 @@ namespace PharmAid.RX
             string httpResultString = "";
 
             httpClient.DefaultRequestHeaders.Clear();
-            var httpResponseMessage = await httpClient.GetAsync(RxUrl+"&action=pharmFill");
+            var httpResponseMessage = await httpClient.GetAsync(RxUrl+"?action=pharmFill");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 httpResultString = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -46,7 +46,7 @@ namespace PharmAid.RX
             string httpResultString = "";
 
             httpClient.DefaultRequestHeaders.Clear();
-            var httpResponseMessage = await httpClient.GetAsync(RxUrl + "&action=pharmLoc");
+            var httpResponseMessage = await httpClient.GetAsync(RxUrl + "?action=pharmLoc");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 httpResultString = await httpResponseMessage.Content.ReadAsStringAsync();
