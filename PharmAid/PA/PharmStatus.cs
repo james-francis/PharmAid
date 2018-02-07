@@ -1,24 +1,18 @@
 ﻿using AlexaSkillsKit.Speechlet;
 using PharmAid.Alexa;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Diagnostics;
 
 namespace PharmAid.RX
 {
     public class PharmStatus
     {
+        // This is Azure Function which would simulate a restful call to a pharmacy system API.
         public static string RxUrl = "http://pharmapi.azurewebsites.net/api/PAFunc1";
 
-        // Call the remote web service.  Invoked from AlexaSpeechletAsync
-        // Parse the raw JSON results to generate the spoken text and card text
+        // This method is invoked when the user want to get his prescription filled.
         public static async Task<SpeechletResponse> FillRxIntent(Session session, HttpClient httpClient)
         {
 
@@ -40,13 +34,14 @@ namespace PharmAid.RX
             return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
         }
 
-        public static async Task<SpeechletResponse> WhereRxIntent(Session session, HttpClient httpClient)
+        // This method is invoked when the user wants to know where his prescription is.
+        public static async Task<SpeechletResponse> FindRxIntent(Session session, HttpClient httpClient)
         {
 
             string httpResultString = "";
 
             httpClient.DefaultRequestHeaders.Clear();
-            var httpResponseMessage = await httpClient.GetAsync(RxUrl + "?action=pharmLoc");
+            var httpResponseMessage = await httpClient.GetAsync(RxUrl + "?action=pharmFind");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 httpResultString = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -61,6 +56,51 @@ namespace PharmAid.RX
             return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
         }
 
+        // This method is invoked when the user wants to know where his prescription is.
+        public static async Task<SpeechletResponse> WhenRxIntent(Session session, HttpClient httpClient)
+        {
+
+            string httpResultString = "";
+
+            httpClient.DefaultRequestHeaders.Clear();
+            var httpResponseMessage = await httpClient.GetAsync(RxUrl + "?action=pharmWhen");
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                httpResultString = await httpResponseMessage.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                httpResponseMessage.Dispose();
+                return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
+            }
+            var simpleIntentResponse = ParseResults(httpResultString, "Prescription for Crestor");
+            httpResponseMessage.Dispose();
+            return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
+        }
+
+        // This method is invoked when the user wants to know where his prescription is.
+        public static async Task<SpeechletResponse> CallDoctorIntent(Session session, HttpClient httpClient)
+        {
+
+            string httpResultString = "";
+
+            httpClient.DefaultRequestHeaders.Clear();
+            var httpResponseMessage = await httpClient.GetAsync(RxUrl + "?action=pharmCall");
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                httpResultString = await httpResponseMessage.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                httpResponseMessage.Dispose();
+                return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
+            }
+            var simpleIntentResponse = ParseResults(httpResultString, "Doctor");
+            httpResponseMessage.Dispose();
+            return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
+        }
+
+        // This method parses the json object returned from the Azure function.
         private static AlexaUtils.SimpleIntentResponse ParseResults(string resultString, string rx)
         {
             string stringToRead = String.Empty;

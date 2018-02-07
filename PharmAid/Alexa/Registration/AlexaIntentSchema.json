@@ -4,10 +4,10 @@
             "intent": "FillRxIntent"
         },
         {
-            "intent": "WhereRxIntent"
+            "intent": "FindRxIntent"
         },
         {
-            "intent": "RxReadyIntent"
+            "intent": "WhenRxIntent"
         },
         {
             "intent": "CallDoctorIntent"

@@ -1,4 +1,4 @@
-﻿FillRxIntent fill my prescription
-WhereRxIntent find my prescription
-RxReadyIntent when will my prescription be ready
-CallDoctorIntent call my doctor
+﻿FillRxIntent to fill my prescription
+FindRxIntent to find my prescription
+WhenRxIntent when will my prescription arrive
+CallDoctorIntent to call my doctor
