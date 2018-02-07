@@ -29,6 +29,8 @@ namespace PharmAid.RX
                 httpResponseMessage.Dispose();
                 return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
             }
+
+            // prescription is hard-coded to Crestor
             var simpleIntentResponse = ParseResults(httpResultString, "Prescription for Crestor");
             httpResponseMessage.Dispose();
             return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
@@ -51,6 +53,8 @@ namespace PharmAid.RX
                 httpResponseMessage.Dispose();
                 return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
             }
+
+            // prescription is hard-coded to Crestor
             var simpleIntentResponse = ParseResults(httpResultString, "Prescription for Crestor");
             httpResponseMessage.Dispose();
             return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
@@ -73,6 +77,8 @@ namespace PharmAid.RX
                 httpResponseMessage.Dispose();
                 return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
             }
+
+            // prescription is hard-coded to Crestor
             var simpleIntentResponse = ParseResults(httpResultString, "Prescription for Crestor");
             httpResponseMessage.Dispose();
             return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
@@ -95,6 +101,7 @@ namespace PharmAid.RX
                 httpResponseMessage.Dispose();
                 return AlexaUtils.BuildSpeechletResponse(new AlexaUtils.SimpleIntentResponse() { cardText = AlexaConstants.AppErrorMessage }, true);
             }
+
             var simpleIntentResponse = ParseResults(httpResultString, "Doctor");
             httpResponseMessage.Dispose();
             return AlexaUtils.BuildSpeechletResponse(simpleIntentResponse, true);
