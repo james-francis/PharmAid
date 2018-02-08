@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -42,25 +40,8 @@ namespace PharmAid.Controllers
 
             // probably don't need to try catch here, but do it here just
             // in case a missing file causes a problem
-
             try
             {
-                //to complete : code to get the song / album image based on music id
-
-                //if (id.StartsWith("music"))
-                //{
-
-                //    var httpClient = new HttpClient();
-                //    var imageUrl = await Groove.Music.GetImageUrl(id, httpClient).ConfigureAwait(false);
-
-                //    var httpResponseMessage = await httpClient.GetByteArrayAsync(imageUrl).ConfigureAwait(false);
-
-                //    var result = new HttpResponseMessage(HttpStatusCode.OK);
-                //    result.Content = new ByteArrayContent(httpResponseMessage);
-                //    result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
-                //    return result;
-                //}
-
                 var imageData = File.ReadAllBytes(HostingEnvironment.MapPath("~/Images/") + id);
                 var result = new HttpResponseMessage(HttpStatusCode.OK);
                 result.Content = new ByteArrayContent(imageData);
@@ -72,9 +53,7 @@ namespace PharmAid.Controllers
             {
                 return null;
             }
-
         }
-
     }
 }
 

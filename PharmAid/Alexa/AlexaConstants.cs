@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Configuration;
+﻿using System.Web.Configuration;
 
 namespace PharmAid.Alexa
 {
@@ -30,7 +26,5 @@ namespace PharmAid.Alexa
         // standard error message
 
         public static string AppErrorMessage = "Sorry, something went wrong.  Please try again.";
-
-
     }
 }

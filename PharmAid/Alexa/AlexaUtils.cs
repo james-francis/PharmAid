@@ -1,11 +1,5 @@
 ﻿using AlexaSkillsKit.Speechlet;
 using AlexaSkillsKit.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Configuration;
 
 namespace PharmAid.Alexa
 {
@@ -14,7 +8,6 @@ namespace PharmAid.Alexa
         // In a debug environment, you might find inbound request validation to be a nuisance, especially if you're
         // manually generating requests using cURL, Postman or another utility.
         // The #if #endif directives disable validation in DEBUG builds.
-
 
         public static bool IsRequestInvalid(Session session)
         {
@@ -114,6 +107,5 @@ namespace PharmAid.Alexa
 
             return response;
         }
-
     }
 }
